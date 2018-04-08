@@ -85,18 +85,18 @@
 
 
 
-<meta name="description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对">
+<meta name="description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧">
 <meta name="keywords" content="Docker,linux自动化运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="registry v2搭建">
 <meta property="og:url" content="http://ippai.top/2018/04/08/registry-v2搭建/index.html">
 <meta property="og:site_name" content="Oliver Blog">
-<meta property="og:description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对">
+<meta property="og:description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T03:24:16.114Z">
+<meta property="og:updated_time" content="2018-04-08T12:28:49.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="registry v2搭建">
-<meta name="twitter:description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对">
+<meta name="twitter:description" content="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧">
 
 
 
@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,051
+                  1,048
                 </span>
               
 
@@ -401,18 +401,20 @@
       
 
       
-        <p>新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。</p>
-<p>之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。</p>
-<p>服务器环境<br>本次使用centos7.3的操作系统，服务器IP假设为：192.168.0.100<br>预先装好docker服务，操作如下：</p>
-<p>添加docker.repo安装源，写入文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/yum.repos.d/docker.repo&lt;&lt;EOF</span><br><span class="line">[dockerrepo]</span><br><span class="line">name=Docker Repository</span><br><span class="line">baseurl=https://yum.dockerproject.org/repo/main/centos/7/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://yum.dockerproject.org/gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></p>
-<p>安装docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-engine -y</span><br><span class="line">systemctl enable docker</span><br><span class="line">systemctl start docker</span><br><span class="line"></span><br><span class="line">1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可</span><br></pre></td></tr></table></figure></p>
-<p>docker pull registry:2.4.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2. 运行registry:2.4.1容器</span><br><span class="line">这里需要注意的是新registry仓库数据目录的位置。之前老版的位置是/tmp/registry，hub.docker.com上的演示命令里写的是/tmp/registry-dev，其实这个不对。试验证明，新registry的仓库目录是在/var/lib/registry，所以运行时挂载目录需要注意。</span><br></pre></td></tr></table></figure></p>
-<p>docker run -d -p 5000:5000 –restart=always \<br>-v /opt/registry-var/:/var/lib/registry/ \<br>registry:2.4.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-v选项指定将/opt/registry-var/目录挂载给/var/lib/registry/</span><br><span class="line">当使用curl http://192.168.0.100:5000/v2/_catalog能看到json格式的返回值时，说明registry已经运行起来了。</span><br><span class="line"></span><br><span class="line">3. 修改配置文件以指定registry地址</span><br><span class="line">上面registry虽然已经运行起来了，但是如果想用push命令上传镜像是会报错的，需要在配置文件中指定registry的地址。在/lib/systemd/system/docker.service文件中添加一下配置：</span><br><span class="line">--insecure-registry 192.168.0.100:5000&apos;</span><br><span class="line"></span><br><span class="line">为了配置简单，省去安全相关的配置，这里使用--insecure-registry选项修改配置文件后，一定要重启docker服务才能生效，</span><br></pre></td></tr></table></figure></p>
-<p>systemctl restart docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这时再push就可以上传镜像到所搭建的registry仓库了。需要注意的是，上传前要先给镜像tag一个192.168.0.100:5000/为前缀的名字，这样才能在push的时候存到私库。</span><br></pre></td></tr></table></figure></p>
-<p>docker tag docker.io/registry:2.4.1 192.168.0.100:5000/registry:2.4.1<br>docker push 192.168.0.100:5000/registry:2.4.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4. 配置带用户权限的registry</span><br><span class="line">到上面为止，registry已经可以使用了。如果想要控制registry的使用权限，使其只有在登录用户名和密码之后才能使用的话，还需要做额外的设置。</span><br><span class="line"></span><br><span class="line">registry的用户名密码文件可以通过htpasswd来生成：</span><br></pre></td></tr></table></figure></p>
-<p>mkdir /opt/registry-var/auth/<br>docker run –entrypoint htpasswd registry:2.4.1 -Bbn felix felix  &gt;&gt; /opt/registry-var/auth/htpasswd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">上面这条命令是为felix用户名生成密码为felix的一条用户信息，存在/opt/registry-var/auth/htpasswd文件里面，文件中存的密码是被加密过的。</span><br><span class="line">使用带用户权限的registry时候，容器的启动命令就跟上面不一样了，将之前的容器停掉并删除，然后执行下面的命令：</span><br></pre></td></tr></table></figure></p>
-<p>docker run -d -p 5000:5000 –restart=always \<br>-v /opt/registry-var/auth/:/auth/ \<br>-e “REGISTRY_AUTH=htpasswd” \<br>-e “REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm” \<br>-e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \<br>-v /opt/registry-var/:/var/lib/registry/ \<br>registry:2.4.1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这时，如果直接想查看仓库信息、pull或push都会出现权限报错。必须先使用docker login 命令来登录私有仓库：</span><br></pre></td></tr></table></figure></p>
-<p>docker login 192.168.0.100:5000<br><code>`</code><br>根据提示，输入用户名和密码即可。如果登录成功，会在/root/.docker/config.json文件中保存账户信息，这样就可以继续使用了。</p>
+        <h1 id="新版-registry-v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry-v2是由go语言开发，docker从1-6版本开始支持registry-v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。"><a href="#新版-registry-v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry-v2是由go语言开发，docker从1-6版本开始支持registry-v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。" class="headerlink" title="新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。"></a>新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。</h1><h1 id="之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry-v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。"><a href="#之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry-v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。" class="headerlink" title="之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。"></a>之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。</h1><h1 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h1><p>本次使用centos7.3的操作系统，服务器IP假设为：192.168.0.100<br>预先装好docker服务，操作如下：</p>
+<h1 id="添加docker-repo安装源，写入文件"><a href="#添加docker-repo安装源，写入文件" class="headerlink" title="添加docker.repo安装源，写入文件"></a>添加docker.repo安装源，写入文件</h1><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tee /etc/yum.repos.d/docker.repo&lt;&lt;EOF</span><br><span class="line">[dockerrepo]</span><br><span class="line">name=Docker Repository</span><br><span class="line">baseurl=https://yum.dockerproject.org/repo/main/centos/7/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=https://yum.dockerproject.org/gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> docker-<span class="keyword">engine</span> -y</span><br><span class="line">systemctl <span class="keyword">enable</span> docker</span><br><span class="line">systemctl <span class="keyword">start</span> docker</span><br></pre></td></tr></table></figure>
+<h1 id="1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可"><a href="#1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可" class="headerlink" title="1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可"></a>1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">pull</span> <span class="selector-tag">registry</span><span class="selector-pseudo">:2.4.1</span></span><br></pre></td></tr></table></figure>
+<h1 id="2-运行registry-2-4-1容器"><a href="#2-运行registry-2-4-1容器" class="headerlink" title="2. 运行registry:2.4.1容器"></a>2. 运行registry:2.4.1容器</h1><p>这里需要注意的是新registry仓库数据目录的位置。之前老版的位置是/tmp/registry，hub.docker.com上的演示命令里写的是/tmp/registry-dev，其实这个不对。试验证明，新registry的仓库目录是在/var/lib/registry，所以运行时挂载目录需要注意。<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart=always \</span><br><span class="line">-<span class="ruby">v /opt/registry-var/<span class="symbol">:/var/lib/registry/</span> \</span></span><br><span class="line"><span class="ruby"><span class="symbol">registry:</span><span class="number">2.4</span>.<span class="number">1</span></span></span><br></pre></td></tr></table></figure></p>
+<p>-v选项指定将/opt/registry-var/目录挂载给/var/lib/registry/<br>当使用curl <a href="http://192.168.0.100:5000/v2/_catalog能看到json格式的返回值时，说明registry已经运行起来了。" target="_blank" rel="noopener">http://192.168.0.100:5000/v2/_catalog能看到json格式的返回值时，说明registry已经运行起来了。</a></p>
+<h1 id="3-修改配置文件以指定registry地址"><a href="#3-修改配置文件以指定registry地址" class="headerlink" title="3. 修改配置文件以指定registry地址"></a>3. 修改配置文件以指定registry地址</h1><p>上面registry虽然已经运行起来了，但是如果想用push命令上传镜像是会报错的，需要在配置文件中指定registry的地址。在/lib/systemd/system/docker.service文件中添加一下配置：<br>–insecure-registry 192.168.0.100:5000’</p>
+<p>为了配置简单，省去安全相关的配置，这里使用–insecure-registry选项修改配置文件后，一定要重启docker服务才能生效，<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">systemctl restart docker</span></span><br></pre></td></tr></table></figure></p>
+<p>这时再push就可以上传镜像到所搭建的registry仓库了。需要注意的是，上传前要先给镜像tag一个192.168.0.100:5000/为前缀的名字，这样才能在push的时候存到私库。<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker tag docker.io/registry:<span class="number">2.4</span><span class="meta">.1</span> <span class="number">192.168</span><span class="meta">.0</span><span class="meta">.100</span>:<span class="number">5000</span>/registry:<span class="number">2.4</span><span class="meta">.1</span></span><br><span class="line">docker <span class="keyword">push</span> <span class="number">192.168</span><span class="meta">.0</span><span class="meta">.100</span>:<span class="number">5000</span>/registry:<span class="number">2.4</span><span class="meta">.1</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="4-配置带用户权限的registry"><a href="#4-配置带用户权限的registry" class="headerlink" title="4. 配置带用户权限的registry"></a>4. 配置带用户权限的registry</h1><p>到上面为止，registry已经可以使用了。如果想要控制registry的使用权限，使其只有在登录用户名和密码之后才能使用的话，还需要做额外的设置。</p>
+<p>registry的用户名密码文件可以通过htpasswd来生成：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="regexp">/opt/</span>registry-var<span class="regexp">/auth/</span></span><br><span class="line">docker run --entrypoint htpasswd <span class="string">registry:</span><span class="number">2.4</span><span class="number">.1</span> -Bbn felix felix  &gt;&gt; <span class="regexp">/opt/</span>registry-var<span class="regexp">/auth/</span>htpasswd</span><br></pre></td></tr></table></figure></p>
+<p>上面这条命令是为felix用户名生成密码为felix的一条用户信息，存在/opt/registry-var/auth/htpasswd文件里面，文件中存的密码是被加密过的。<br>使用带用户权限的registry时候，容器的启动命令就跟上面不一样了，将之前的容器停掉并删除，然后执行下面的命令：<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 --restart=always \</span><br><span class="line">-<span class="ruby">v /opt/registry-var/auth/<span class="symbol">:/auth/</span> \</span></span><br><span class="line"><span class="ruby">-e <span class="string">"REGISTRY_AUTH=htpasswd"</span> \</span></span><br><span class="line"><span class="ruby">-e <span class="string">"REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm"</span> \</span></span><br><span class="line"><span class="ruby">-e REGISTRY_AUTH_HTPASSWD_PATH=<span class="regexp">/auth/htpasswd</span> \</span></span><br><span class="line"><span class="ruby">-v /opt/registry-var/<span class="symbol">:/var/lib/registry/</span> \</span></span><br><span class="line"><span class="ruby"><span class="symbol">registry:</span><span class="number">2.4</span>.<span class="number">1</span></span></span><br></pre></td></tr></table></figure></p>
+<p>这时，如果直接想查看仓库信息、pull或push都会出现权限报错。必须先使用docker login 命令来登录私有仓库：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">docker</span> <span class="selector-tag">login</span> 192<span class="selector-class">.168</span><span class="selector-class">.0</span><span class="selector-class">.100</span><span class="selector-pseudo">:5000</span></span><br></pre></td></tr></table></figure></p>
+<p>根据提示，输入用户名和密码即可。如果登录成功，会在/root/.docker/config.json文件中保存账户信息，这样就可以继续使用了。</p>
 
       
     </div>
@@ -509,8 +511,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -609,6 +620,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#新版-registry-v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry-v2是由go语言开发，docker从1-6版本开始支持registry-v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。"><span class="nav-number">1.</span> <span class="nav-text">新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry-v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。"><span class="nav-number">2.</span> <span class="nav-text">之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器环境"><span class="nav-number">3.</span> <span class="nav-text">服务器环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加docker-repo安装源，写入文件"><span class="nav-number">4.</span> <span class="nav-text">添加docker.repo安装源，写入文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker"><span class="nav-number">5.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可"><span class="nav-number">6.</span> <span class="nav-text">1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-运行registry-2-4-1容器"><span class="nav-number">7.</span> <span class="nav-text">2. 运行registry:2.4.1容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改配置文件以指定registry地址"><span class="nav-number">8.</span> <span class="nav-text">3. 修改配置文件以指定registry地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-配置带用户权限的registry"><span class="nav-number">9.</span> <span class="nav-text">4. 配置带用户权限的registry</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
