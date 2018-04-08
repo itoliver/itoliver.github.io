@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="####搭建集群etcd ###安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
+<meta name="description" content="##搭建集群etcd## ##安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
 <meta name="keywords" content="linux自动化运维, etcd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="etcd集群">
 <meta property="og:url" content="http://ippai.top/2018/04/08/etcd集群/index.html">
 <meta property="og:site_name" content="Oliver Blog">
-<meta property="og:description" content="####搭建集群etcd ###安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
+<meta property="og:description" content="##搭建集群etcd## ##安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T02:54:38.452Z">
+<meta property="og:updated_time" content="2018-04-08T02:58:12.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="etcd集群">
-<meta name="twitter:description" content="####搭建集群etcd ###安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
+<meta name="twitter:description" content="##搭建集群etcd## ##安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装">
 
 
 
@@ -340,8 +340,8 @@
       
 
       
-        <p>####搭建集群etcd</p>
-<p>###安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装<br><a id="more"></a></p>
+        <p>##搭建集群etcd##</p>
+<p>##安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装<br><a id="more"></a></p>
 <p>##Configure epel yum<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;&amp; rpm -ivh epel-release-latest-7.noarch.rpm</span><br></pre></td></tr></table></figure></p>
 <p>##install etcd<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y etcd</span><br></pre></td></tr></table></figure></p>
 <p>##configure host<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;etcd1 192.168.1.100&quot; &gt;&gt; /etc/hosts</span><br><span class="line">echo &quot;etcd2 192.168.1.200&quot; &gt;&gt; /etc/hosts</span><br></pre></td></tr></table></figure></p>
