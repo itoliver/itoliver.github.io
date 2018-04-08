@@ -364,7 +364,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  332
+                  292
                 </span>
               
 
@@ -402,14 +402,52 @@
 
       
         <h1 id="搭建集群etcd"><a href="#搭建集群etcd" class="headerlink" title="搭建集群etcd"></a>搭建集群etcd</h1><h1 id="安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装"><a href="#安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装" class="headerlink" title="安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装"></a>安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装</h1><a id="more"></a>
-<p>Configure epel yum<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="regexp">//</span>dl.fedoraproject.org<span class="regexp">/pub/</span>epel<span class="regexp">/epel-release-latest-7.noarch.rpm &amp;&amp; rpm -ivh epel-release-latest-7.noarch.rpm</span></span><br></pre></td></tr></table></figure></p>
-<p>install etcd<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y etcd</span><br></pre></td></tr></table></figure></p>
-<p>configure host<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">"etcd1 192.168.1.100"</span> <span class="meta">&gt;&gt; </span>/etc/hosts</span><br><span class="line">echo <span class="string">"etcd2 192.168.1.200"</span> <span class="meta">&gt;&gt; </span>/etc/hosts</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">IP</span>=$(ifconfig  eth1 |awk  -F <span class="string">'[: ]+'</span> <span class="string">'NR==2&#123;print $3&#125;'</span>)</span><br><span class="line"><span class="attr">IP1</span>=<span class="number">192.168</span>.<span class="number">1.100</span></span><br><span class="line"><span class="attr">IP2</span>=<span class="number">192.168</span>.<span class="number">1.200</span></span><br><span class="line"><span class="attr">HOST</span>=<span class="string">"etcd1=http://192.168.1.100:2380,etcd2=http://192.168.1.200:2380"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight purebasic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function node1&#123;</span><br><span class="line"><span class="symbol">#Configure</span> the node1 etcd file</span><br><span class="line">sed -i 's#\<span class="symbol">#ETCD_LISTEN_PEER_URLS</span>=<span class="string">"http://localhost:2380"</span><span class="symbol">#ETCD_LISTEN_PEER_URLS</span>=<span class="string">"http://$&#123;IP1&#125;:2380"</span><span class="symbol">#g</span>' /etc/etcd/etcd.conf</span><br><span class="line">sed -i 's<span class="symbol">#ETCD_LISTEN_CLIENT_URLS</span>=<span class="string">"http://localhost:2379"</span><span class="symbol">#ETCD_LISTEN_CLIENT_URLS</span>=<span class="string">"http://0.0.0.0:2379"</span><span class="symbol">#g</span>' /etc/etcd/etcd.conf</span><br><span class="line">sed -i 's<span class="symbol">#ETCD_ADVERTISE_CLIENT_URLS</span>=<span class="string">"http://localhost:2379"</span><span class="symbol">#ETCD_ADVERTISE_CLIENT_URLS</span>=<span class="string">"http://$&#123;IP1&#125;:2379"</span><span class="symbol">#g</span>' /etc/etcd/etc.conf</span><br><span class="line">sed -i 's#\<span class="symbol">#ETCD_INITIAL_CLUSTER</span>=<span class="string">"default=http://localhost:2380"</span><span class="symbol">#ETCD_INITIAL_CLUSTER</span>=<span class="string">"$&#123;HOST&#125;"</span>#'g</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function node2&#123;</span><br><span class="line"><span class="symbol">#Configure</span> the node2 etcd file</span><br><span class="line">sed -i 's#\<span class="symbol">#ETCD_LISTEN_PEER_URLS</span>=<span class="string">"http://localhost:2380"</span><span class="symbol">#ETCD_LISTEN_PEER_URLS</span>=<span class="string">"http://$&#123;IP2&#125;:2380"</span><span class="symbol">#g</span>' /etc/etcd/etcd.conf</span><br><span class="line">sed -i 's<span class="symbol">#ETCD_LISTEN_CLIENT_URLS</span>=<span class="string">"http://localhost:2379"</span><span class="symbol">#ETCD_LISTEN_CLIENT_URLS</span>=<span class="string">"http://0.0.0.0:2379"</span><span class="symbol">#g</span>' /etc/etcd/etcd.conf</span><br><span class="line">sed -i 's<span class="symbol">#ETCD_ADVERTISE_CLIENT_URLS</span>=<span class="string">"http://localhost:2379"</span><span class="symbol">#ETCD_ADVERTISE_CLIENT_URLS</span>=<span class="string">"http://$&#123;IP2&#125;:2379"</span><span class="symbol">#g</span>' /etc/etcd/etc.conf</span><br><span class="line">sed -i 's#\<span class="symbol">#ETCD_INITIAL_CLUSTER</span>=<span class="string">"default=http://localhost:2380"</span><span class="symbol">#ETCD_INITIAL_CLUSTER</span>=<span class="string">"$&#123;HOST&#125;"</span><span class="symbol">#g</span>' /etc/etcd/etc.conf</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start&#123;</span><br><span class="line">	systemctl enable etcd</span><br><span class="line">	systemctl restart etcd</span><br><span class="line">	systemctl status etcd</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ <span class="string">"$IP"</span>==<span class="string">"$IP1"</span> ]<span class="comment">;then</span></span><br><span class="line">	node1</span><br><span class="line">	start</span><br><span class="line">else</span><br><span class="line">	node2</span><br><span class="line">	start</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
-<p>look etcd node list<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">etcdctl member <span class="built_in">list</span></span><br></pre></td></tr></table></figure></p>
-<p>look etcd node status<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">etcdctl  cluster-health</span></span><br></pre></td></tr></table></figure></p>
+<p>Configure epel yum</p>
+<pre><code>wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;&amp; rpm -ivh epel-release-latest-7.noarch.rpm
+</code></pre><p>install etcd</p>
+<pre><code>yum install -y etcd
+</code></pre><p>configure host</p>
+<pre><code>echo &quot;etcd1 192.168.1.100&quot; &gt;&gt; /etc/hosts
+echo &quot;etcd2 192.168.1.200&quot; &gt;&gt; /etc/hosts
+</code></pre><pre><code>IP=$(ifconfig  eth1 |awk  -F &#39;[: ]+&#39; &#39;NR==2{print $3}&#39;)
+IP1=192.168.1.100
+IP2=192.168.1.200
+HOST=&quot;etcd1=http://192.168.1.100:2380,etcd2=http://192.168.1.200:2380&quot;
+</code></pre><pre><code>function node1{
+#Configure the node1 etcd file
+sed -i &#39;s#\#ETCD_LISTEN_PEER_URLS=&quot;http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP1}:2380&quot;#g&#39; /etc/etcd/etcd.conf
+sed -i &#39;s#ETCD_LISTEN_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39; /etc/etcd/etcd.conf
+sed -i &#39;s#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP1}:2379&quot;#g&#39; /etc/etcd/etc.conf
+sed -i &#39;s#\#ETCD_INITIAL_CLUSTER=&quot;default=http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#&#39;g
 
+}
+
+function node2{
+#Configure the node2 etcd file
+sed -i &#39;s#\#ETCD_LISTEN_PEER_URLS=&quot;http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP2}:2380&quot;#g&#39; /etc/etcd/etcd.conf
+sed -i &#39;s#ETCD_LISTEN_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39; /etc/etcd/etcd.conf
+sed -i &#39;s#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP2}:2379&quot;#g&#39; /etc/etcd/etc.conf
+sed -i &#39;s#\#ETCD_INITIAL_CLUSTER=&quot;default=http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#g&#39; /etc/etcd/etc.conf
+}
+
+function start{
+    systemctl enable etcd
+    systemctl restart etcd
+    systemctl status etcd
+}
+
+if [ &quot;$IP&quot;==&quot;$IP1&quot; ];then
+    node1
+    start
+else
+    node2
+    start
+fi
+</code></pre><p>look etcd node list</p>
+<pre><code>etcdctl member list
+</code></pre><p>look etcd node status</p>
+<pre><code>etcdctl  cluster-health
+</code></pre>
       
     </div>
     
@@ -481,6 +519,11 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTU2Mi8xMjA5OA=="></div>
+    </div>
 
   
 
@@ -814,6 +857,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
