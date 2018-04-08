@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux自动化运维, etcd," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Oliver Blog">
-<meta property="og:url" content="http://ippai.top/archives/index.html">
+<meta name="description" content="#搭建集群etcd #安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装 #Configure epel yumwget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;amp;&amp;amp; rpm -ivh epel-release-latest-7.noarch.rpm #ins">
+<meta name="keywords" content="linux自动化运维, etcd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="etcd集群">
+<meta property="og:url" content="http://ippai.top/2018/04/08/etcd集群/index.html">
 <meta property="og:site_name" content="Oliver Blog">
+<meta property="og:description" content="#搭建集群etcd #安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装 #Configure epel yumwget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;amp;&amp;amp; rpm -ivh epel-release-latest-7.noarch.rpm #ins">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-08T02:48:38.563Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Oliver Blog">
+<meta name="twitter:title" content="etcd集群">
+<meta name="twitter:description" content="#搭建集群etcd #安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装 #Configure epel yumwget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;amp;&amp;amp; rpm -ivh epel-release-latest-7.noarch.rpm #ins">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://ippai.top/archives/"/>
+  <link rel="canonical" href="http://ippai.top/2018/04/08/etcd集群/"/>
 
 
 
 
 
-  <title>归档 | Oliver Blog</title>
+  <title>etcd集群 | Oliver Blog</title>
   
 
 
@@ -140,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     <a href="https://github.com/itoliver/itoliver.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -254,148 +259,161 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ippai.top/2018/04/08/etcd集群/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Oliver">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oliver Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">etcd集群</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T10:47:45+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/08/etcd集群/" itemprop="url">
-              
-                <span itemprop="name">etcd集群</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-08T10:47:45+08:00"
-              content="2018-04-08" >
-          04-08
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/04/Add-User-Script/" itemprop="url">
-              
-                <span itemprop="name">Add User Script</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-04T18:39:32+08:00"
-              content="2018-04-04" >
-          04-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/04/你好，Oliver/" itemprop="url">
-              
-                <span itemprop="name">你好，Oliver</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-04T11:57:04+08:00"
-              content="2018-04-04" >
-          04-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>#搭建集群etcd</p>
+<p>#安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装</p>
+<p>#Configure epel yum<br>wget <a href="http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="noopener">http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a> &amp;&amp; rpm -ivh epel-release-latest-7.noarch.rpm</p>
+<p>#install etcd<br>yum install -y etcd</p>
+<p>#configure host<br>echo “etcd1 192.168.1.100” &gt;&gt; /etc/hosts<br>echo “etcd2 192.168.1.200” &gt;&gt; /etc/hosts</p>
+<p>IP=$(ifconfig  eth1 |awk  -F ‘[: ]+’ ‘NR==2{print $3}’)<br>IP1=192.168.1.100<br>IP2=192.168.1.200<br>HOST=”etcd1=<a href="http://192.168.1.100:2380,etcd2=http://192.168.1.200:2380&quot;" target="_blank" rel="noopener">http://192.168.1.100:2380,etcd2=http://192.168.1.200:2380&quot;</a></p>
+<p>function node1{</p>
+<p>#Configure the node1 etcd file<br>sed -i ‘s##ETCD_LISTEN_PEER_URLS=”<a href="http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP1}:2380&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP1}:2380&quot;#g&#39;</a> /etc/etcd/etcd.conf<br>sed -i ‘s#ETCD_LISTEN_CLIENT_URLS=”<a href="http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39;</a> /etc/etcd/etcd.conf<br>sed -i ‘s#ETCD_ADVERTISE_CLIENT_URLS=”<a href="http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP1}:2379&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP1}:2379&quot;#g&#39;</a> /etc/etcd/etc.conf<br>sed -i ‘s##ETCD_INITIAL_CLUSTER=”default=<a href="http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#&#39;g" target="_blank" rel="noopener">http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#&#39;g</a></p>
+<p>}</p>
+<p>function node2{</p>
+<p>#Configure the node2 etcd file<br>sed -i ‘s##ETCD_LISTEN_PEER_URLS=”<a href="http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP2}:2380&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP2}:2380&quot;#g&#39;</a> /etc/etcd/etcd.conf<br>sed -i ‘s#ETCD_LISTEN_CLIENT_URLS=”<a href="http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39;</a> /etc/etcd/etcd.conf<br>sed -i ‘s#ETCD_ADVERTISE_CLIENT_URLS=”<a href="http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP2}:2379&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP2}:2379&quot;#g&#39;</a> /etc/etcd/etc.conf<br>sed -i ‘s##ETCD_INITIAL_CLUSTER=”default=<a href="http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#g&#39;" target="_blank" rel="noopener">http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#g&#39;</a> /etc/etcd/etc.conf<br>}</p>
+<p>function start{<br>    systemctl enable etcd<br>    systemctl restart etcd<br>    systemctl status etcd<br>}</p>
+<p>if [ “$IP”==”$IP1” ];then<br>    node1<br>    start<br>else<br>    node2<br>    start<br>fi</p>
+<p>#look etcd node list<br>etcdctl member list</p>
+<p>#look etcd node status<br>etcdctl  cluster-health</p>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux自动化运维-etcd/" rel="tag"># linux自动化运维, etcd</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/04/Add-User-Script/" rel="next" title="Add User Script">
+                <i class="fa fa-chevron-left"></i> Add User Script
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -403,6 +421,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -626,6 +648,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
