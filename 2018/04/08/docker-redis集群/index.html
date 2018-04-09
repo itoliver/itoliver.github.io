@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Docker,linux自动化运维," />
+  <meta name="keywords" content="linux自动化运维,docker," />
 
 
 
@@ -85,18 +85,18 @@
 
 
 
-<meta name="description" content="基于docker搭建redis集群方案">
-<meta name="keywords" content="Docker,linux自动化运维">
+<meta name="description" content="前言Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。此文只要是针对基于docker部署redis集群，实现主从同步">
+<meta name="keywords" content="linux自动化运维,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker-redis集群">
 <meta property="og:url" content="http://ippai.top/2018/04/08/docker-redis集群/index.html">
 <meta property="og:site_name" content="Oliver Blog">
-<meta property="og:description" content="基于docker搭建redis集群方案">
+<meta property="og:description" content="前言Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。此文只要是针对基于docker部署redis集群，实现主从同步">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-08T12:15:42.033Z">
+<meta property="og:updated_time" content="2018-04-09T03:39:31.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker-redis集群">
-<meta name="twitter:description" content="基于docker搭建redis集群方案">
+<meta name="twitter:description" content="前言Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。此文只要是针对基于docker部署redis集群，实现主从同步">
 
 
 
@@ -375,7 +375,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  785
+                  872
                 </span>
               
 
@@ -412,7 +412,7 @@
       
 
       
-        <p>基于docker搭建redis集群方案<br><a id="more"></a><br>master    192.168.1.14<br>slave    192.168.1.15</p>
+        <p>前言<br>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助。<br>此文只要是针对基于docker部署redis集群，实现主从同步<br><a id="more"></a><br>master    192.168.1.14<br>slave    192.168.1.15</p>
 <h2 id="master操作"><a href="#master操作" class="headerlink" title="master操作"></a>master操作</h2><h1 id="1-创建数据文件"><a href="#1-创建数据文件" class="headerlink" title="1.创建数据文件"></a>1.创建数据文件</h1><pre><code>mkdir /opt/redis
 </code></pre><h1 id="2-拉取redis镜像"><a href="#2-拉取redis镜像" class="headerlink" title="2.拉取redis镜像"></a>2.拉取redis镜像</h1><pre><code>docker pull benyoo/redis:3.2.5
 </code></pre><h1 id="3-配置redis文件"><a href="#3-配置redis文件" class="headerlink" title="3.配置redis文件"></a>3.配置redis文件</h1><pre><code>echo &#39;bind 0.0.0.0
@@ -614,9 +614,9 @@ www.shangtv.cn
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"># Docker</a>
-          
             <a href="/tags/linux自动化运维/" rel="tag"># linux自动化运维</a>
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
           
         </div>
       
@@ -747,7 +747,7 @@ www.shangtv.cn
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

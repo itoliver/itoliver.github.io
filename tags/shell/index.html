@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="linux自动化运维,etcd," />
+  <meta name="keywords" content="linux, NexT, Hexo, shell, docker, 博客, oliver, 自动化, 运维, nginx, php, mysql" />
 
 
 
@@ -85,18 +85,16 @@
 
 
 
-<meta name="description" content="前言Etcd:一个键值存储仓库，主要用于配置共享和服务发现。优点：    简单：支持 curl 方式的用户 API (HTTP+JSON)    安全：可选 SSL 客户端证书认证    快速：单实例可达每秒 1000 次写操作    可靠：使用 Raft 实现分布式 本文主要阐述集群etcd的部署">
-<meta name="keywords" content="linux自动化运维,etcd">
-<meta property="og:type" content="article">
-<meta property="og:title" content="etcd集群">
-<meta property="og:url" content="http://ippai.top/2018/04/08/etcd集群/index.html">
+<meta name="description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Oliver Blog">
+<meta property="og:url" content="http://ippai.top/tags/shell/index.html">
 <meta property="og:site_name" content="Oliver Blog">
-<meta property="og:description" content="前言Etcd:一个键值存储仓库，主要用于配置共享和服务发现。优点：    简单：支持 curl 方式的用户 API (HTTP+JSON)    安全：可选 SSL 客户端证书认证    快速：单实例可达每秒 1000 次写操作    可靠：使用 Raft 实现分布式 本文主要阐述集群etcd的部署">
+<meta property="og:description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T03:45:34.577Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="etcd集群">
-<meta name="twitter:description" content="前言Etcd:一个键值存储仓库，主要用于配置共享和服务发现。优点：    简单：支持 curl 方式的用户 API (HTTP+JSON)    安全：可选 SSL 客户端证书认证    快速：单实例可达每秒 1000 次写操作    可靠：使用 Raft 实现分布式 本文主要阐述集群etcd的部署">
+<meta name="twitter:title" content="Oliver Blog">
+<meta name="twitter:description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
 
 
 
@@ -126,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://ippai.top/2018/04/08/etcd集群/"/>
+  <link rel="canonical" href="http://ippai.top/tags/shell/"/>
 
 
 
 
 
-  <title>etcd集群 | Oliver Blog</title>
+  <title>标签: shell | Oliver Blog</title>
   
 
 
@@ -151,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <a href="https://github.com/itoliver/itoliver.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -289,286 +287,54 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>shell<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ippai.top/2018/04/08/etcd集群/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oliver">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oliver Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/04/04/Add-User-Script/" itemprop="url">
+              
+                <span itemprop="name">Add User Script</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">etcd集群</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-            
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T10:47:45+08:00">
-                2018-04-08
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-04T18:39:32+08:00"
+              content="2018-04-04" >
+          04-04
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/08/etcd集群/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/08/etcd集群/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  374
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>前言<br>Etcd:一个键值存储仓库，主要用于配置共享和服务发现。<br>优点：<br>    简单：支持 curl 方式的用户 API (HTTP+JSON)<br>    安全：可选 SSL 客户端证书认证<br>    快速：单实例可达每秒 1000 次写操作<br>    可靠：使用 Raft 实现分布式</p>
-<p>本文主要阐述集群etcd的部署<br><a id="more"></a><br>安装etcd可以通过源码编译安装，也可以用yum安装，这里实验用yum安装<br>Configure epel yum</p>
-<pre><code>wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm &amp;&amp; rpm -ivh epel-release-latest-7.noarch.rpm
-</code></pre><p>install etcd</p>
-<pre><code>yum install -y etcd
-</code></pre><p>configure host</p>
-<pre><code>echo &quot;etcd1 192.168.1.100&quot; &gt;&gt; /etc/hosts
-echo &quot;etcd2 192.168.1.200&quot; &gt;&gt; /etc/hosts
-</code></pre><pre><code>IP=$(ifconfig  eth1 |awk  -F &#39;[: ]+&#39; &#39;NR==2{print $3}&#39;)
-IP1=192.168.1.100
-IP2=192.168.1.200
-HOST=&quot;etcd1=http://192.168.1.100:2380,etcd2=http://192.168.1.200:2380&quot;
-</code></pre><pre><code>function node1{
-#Configure the node1 etcd file
-sed -i &#39;s#\#ETCD_LISTEN_PEER_URLS=&quot;http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP1}:2380&quot;#g&#39; /etc/etcd/etcd.conf
-sed -i &#39;s#ETCD_LISTEN_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39; /etc/etcd/etcd.conf
-sed -i &#39;s#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP1}:2379&quot;#g&#39; /etc/etcd/etc.conf
-sed -i &#39;s#\#ETCD_INITIAL_CLUSTER=&quot;default=http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#&#39;g
-
-}
-
-function node2{
-#Configure the node2 etcd file
-sed -i &#39;s#\#ETCD_LISTEN_PEER_URLS=&quot;http://localhost:2380&quot;#ETCD_LISTEN_PEER_URLS=&quot;http://${IP2}:2380&quot;#g&#39; /etc/etcd/etcd.conf
-sed -i &#39;s#ETCD_LISTEN_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_LISTEN_CLIENT_URLS=&quot;http://0.0.0.0:2379&quot;#g&#39; /etc/etcd/etcd.conf
-sed -i &#39;s#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://localhost:2379&quot;#ETCD_ADVERTISE_CLIENT_URLS=&quot;http://${IP2}:2379&quot;#g&#39; /etc/etcd/etc.conf
-sed -i &#39;s#\#ETCD_INITIAL_CLUSTER=&quot;default=http://localhost:2380&quot;#ETCD_INITIAL_CLUSTER=&quot;${HOST}&quot;#g&#39; /etc/etcd/etc.conf
-}
-
-function start{
-    systemctl enable etcd
-    systemctl restart etcd
-    systemctl status etcd
-}
-
-if [ &quot;$IP&quot;==&quot;$IP1&quot; ];then
-    node1
-    start
-else
-    node2
-    start
-fi
-</code></pre><p>look etcd node list</p>
-<pre><code>etcdctl member list
-</code></pre><p>look etcd node status</p>
-<pre><code>etcdctl  cluster-health
-</code></pre>
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-        
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>----------------------------------------------</span></p>
-  <p><span>本文标题：</span><a href="/2018/04/08/etcd集群/">etcd集群</a></p>
-  <p><span>文章作者：</span><a href="/" title="访问 Oliver 的个人博客">Oliver</a></p>
-  <p><span>发布时间：</span>2018年04月08日 - 10:04</p>
-  <p><span>最后更新：</span>2018年04月09日 - 11:04</p>
-  <p><span>原始链接：</span><a href="/2018/04/08/etcd集群/" title="etcd集群">http://ippai.top/2018/04/08/etcd集群/</a>
-    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://ippai.top/2018/04/08/etcd集群/"  aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议：</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-      $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
-        });
-    });  
-</script>
-
-      
-    </div>
-
-    
-
-    
-
-    
-
-<div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div
-  
-</div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/linux自动化运维/" rel="tag"># linux自动化运维</a>
-          
-            <a href="/tags/etcd/" rel="tag"># etcd</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/04/Add-User-Script/" rel="next" title="Add User Script">
-                <i class="fa fa-chevron-left"></i> Add User Script
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/08/registry-v2搭建/" rel="prev" title="registry v2搭建">
-                registry v2搭建 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -576,13 +342,6 @@ fi
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -855,10 +614,6 @@ fi
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
