@@ -2,30 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://ippai.top/2018/04/08/registry-v2%E6%90%AD%E5%BB%BA/</loc>
+    
+    <lastmod>2018-04-09T05:48:07.507Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://ippai.top/2018/04/08/docker-swarm%E9%9B%86%E7%BE%A4/</loc>
     
-    <lastmod>2018-04-09T05:05:49.730Z</lastmod>
+    <lastmod>2018-04-09T05:47:58.628Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://ippai.top/2018/04/08/docker-redis%E9%9B%86%E7%BE%A4/</loc>
     
-    <lastmod>2018-04-09T05:05:40.577Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ippai.top/2018/04/09/docker-mariadb%E9%9B%86%E7%BE%A4-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
-    
-    <lastmod>2018-04-09T05:05:22.308Z</lastmod>
+    <lastmod>2018-04-09T05:47:52.146Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://ippai.top/2018/04/09/docker-nginx-php%E9%83%A8%E7%BD%B2/</loc>
     
-    <lastmod>2018-04-09T05:05:15.965Z</lastmod>
+    <lastmod>2018-04-09T05:47:45.621Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://ippai.top/2018/04/09/docker-mariadb%E9%9B%86%E7%BE%A4-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/</loc>
+    
+    <lastmod>2018-04-09T05:47:38.480Z</lastmod>
     
   </url>
   
@@ -33,13 +40,6 @@
     <loc>http://ippai.top/about/index.html</loc>
     
     <lastmod>2018-04-09T04:23:51.684Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://ippai.top/2018/04/08/registry-v2%E6%90%AD%E5%BB%BA/</loc>
-    
-    <lastmod>2018-04-09T03:46:31.427Z</lastmod>
     
   </url>
   
