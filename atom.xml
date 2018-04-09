@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ippai.top/"/>
-  <updated>2018-04-09T03:45:45.835Z</updated>
+  <updated>2018-04-09T04:51:57.888Z</updated>
   <id>http://ippai.top/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>docker-nginx-php部署</title>
+    <link href="http://ippai.top/2018/04/09/docker-nginx-php%E9%83%A8%E7%BD%B2/"/>
+    <id>http://ippai.top/2018/04/09/docker-nginx-php部署/</id>
+    <published>2018-04-09T04:38:29.000Z</published>
+    <updated>2018-04-09T04:51:57.888Z</updated>
+    
+    <content type="html"><![CDATA[<p>前言<br>nginx是web服务器常用的架构,是一个高性能的HTTP和反向代理服务器,也是一个IMAP/POP3/SMTP服务器。<br><a id="more"></a><br>服务器环境<br>nignx:基于docker最新版nginx<br>php:7.1.5</p><h1 id="1-拉取nginx和php-fpm镜像"><a href="#1-拉取nginx和php-fpm镜像" class="headerlink" title="1.拉取nginx和php-fpm镜像"></a>1.拉取nginx和php-fpm镜像</h1><pre><code>docker pull nginx</code></pre><p>docker pull php:7.1.5-fpm #自定义版本</p><pre><code>docker pull bitnami/php-fpm</code></pre><h1 id="2-创建nginx数据目录"><a href="#2-创建nginx数据目录" class="headerlink" title="2.创建nginx数据目录"></a>2.创建nginx数据目录</h1><pre><code>mkdir -p /opt/nginx/{conf,conf.d,html,log}mkdir -p /opt/php/conf</code></pre><h1 id="3-创建nginx-default-conf-此配置是支持go语言的反向代理"><a href="#3-创建nginx-default-conf-此配置是支持go语言的反向代理" class="headerlink" title="3.创建nginx default.conf,此配置是支持go语言的反向代理"></a>3.创建nginx default.conf,此配置是支持go语言的反向代理</h1><pre><code>cat /opt/nginx/conf.d/default.conf &lt;&lt; EOFmap $http_upgrade $connection_upgrade {        default upgrade;        &#39;&#39;      close;}upstream gameweb {        ip_hash;        server 192.168.1.14:3001 weight=2;        server 192.168.1.14:3002;}server{    listen 3003;    server_name master.localhost.com;    error_log /var/log/nginx/gameweb_error.log debug;    access_log /var/log/nginx/gameweb_access.log;location / {        proxy_http_version 1.1;        proxy_set_header Upgrade $http_upgrade;        proxy_set_header Connection $connection_upgrade;        proxy_pass_header Server;        proxy_set_header Host $http_host;        proxy_redirect off;        proxy_set_header X-Real-IP $remote_addr;        proxy_set_header X-Scheme $scheme;        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;        proxy_set_header X-Nginx-Proxy true;        proxy_pass http://gameweb;        add_header Access-Control-Allow-Origin *;        add_header Access-Control-Allow-Credentials true;        add_header Access-Control-Allow-Headers Content-Type,Accept;        add_header Access-Control-Allow-Methods GET;    }}server {        listen       80 default_server;        server_name  _;        root         /usr/share/nginx/html;        location / {            index  index.html index.htm index.php;            autoindex  off;        }        location ~ \.php(.*)$ {            root           /usr/share/nginx/html/;            fastcgi_pass   php:9000;            fastcgi_index  index.php;            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;            fastcgi_param  PATH_INFO  $fastcgi_path_info;            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;            include        fastcgi_params;        }}EOF</code></pre><h1 id="4-配置php测试文件"><a href="#4-配置php测试文件" class="headerlink" title="4.配置php测试文件"></a>4.配置php测试文件</h1><pre><code>tee /opt/nginx/html/index.php &lt;&lt;EOF&lt;?phpecho &quot;TEST PAGE&quot;?&gt;EOF# 5.启动php容器</code></pre><p>docker run -tid \<br>-p 9000:9000 \<br>–name php-fpm \<br>–restart=always \<br>–privileged=true \<br>-v /opt/php/conf/:/bitnami/php/conf/ \<br>-v /opt/nginx/html:/usr/share/nginx/html \<br>bitnami/php-fpm</p><pre><code># 6.启动nginx容器</code></pre><p>docker run -tid \<br>–name nginx \<br>–restart=always \<br>-p 80:80 \<br>–privileged=true \<br>-v /opt/nginx/conf.d:/etc/nginx/conf.d \<br>-v /opt/nginx/conf/nginx.conf:/etc/nginx/nginx.conf \<br>-v /opt/nginx/html:/usr/share/nginx/html \<br>-v /opt/nginx/log:/var/log/nginx \<br>–link php-fpm:php \<br>nginx<br><code>`</code></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前言&lt;br&gt;nginx是web服务器常用的架构,是一个高性能的HTTP和反向代理服务器,也是一个IMAP/POP3/SMTP服务器。&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker-mariadb集群-主从同步</title>
+    <link href="http://ippai.top/2018/04/09/docker-mariadb%E9%9B%86%E7%BE%A4-%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5/"/>
+    <id>http://ippai.top/2018/04/09/docker-mariadb集群-主从同步/</id>
+    <published>2018-04-09T04:27:34.000Z</published>
+    <updated>2018-04-09T04:37:36.068Z</updated>
+    
+    <content type="html"><![CDATA[<p>前言<br>MariaDB数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可 MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。在存储引擎方面，使用XtraDB（英语：XtraDB）来代替MySQL的InnoDB。<br><a id="more"></a></p><h1 id="修改mariadb-docker系统时间"><a href="#修改mariadb-docker系统时间" class="headerlink" title="修改mariadb docker系统时间"></a>修改mariadb docker系统时间</h1><pre><code>tzselectcp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</code></pre><h2 id="master部署"><a href="#master部署" class="headerlink" title="master部署"></a>master部署</h2><h1 id="1-创建mariadb数据配置文件"><a href="#1-创建mariadb数据配置文件" class="headerlink" title="1.创建mariadb数据配置文件"></a>1.创建mariadb数据配置文件</h1><pre><code>mkdir -p /opt/docker-mariadb/{data,conf.d,script}</code></pre><h1 id="2-拉取mairadb10-1-10镜像"><a href="#2-拉取mairadb10-1-10镜像" class="headerlink" title="2.拉取mairadb10.1.10镜像"></a>2.拉取mairadb10.1.10镜像</h1><pre><code>docker pull mariadb:10.1.10</code></pre><h1 id="3-创建mariadb配置文件"><a href="#3-创建mariadb配置文件" class="headerlink" title="3.创建mariadb配置文件"></a>3.创建mariadb配置文件</h1><pre><code>tee /opt/docker-mariadb/conf.d/my.cnf &lt;&lt;EOF[mysqld]datadir=/var/lib/mysqlsocket=/run/mysqld/mysqld.sockserver-id = 1log_bin=master-binrelay-log=relay-binexpire_logs_days = 30binlog_format=rowsync_binlog = 1#sync_master_info = 1default-storage-engine=INNODBinnodb_file_per_table = ON#innodb_flush_logs_at_trx_commit#innodb_support_xa = oncharacter-set-server=utf8mb4slow_query_log = 1long_query_time = 2log_output = &#39;TABLE&#39;[mysql]default-character-set=utf8mb4auto-rehash[mysqld_safe]log-error=/var/log/mysql.logpid-file=/run/mysqld/mysqld.pidEOF</code></pre><h1 id="4-创建运行脚本"><a href="#4-创建运行脚本" class="headerlink" title="4.创建运行脚本"></a>4.创建运行脚本</h1><pre><code>tee /opt/docker-mariadb/script/mariadb.sh&lt;&lt;EOF#!/bin/bashdocker run -tid \--restart=always \--name mariadb-master \-p 3307:3306 \-v /opt/docker-mariadb/data:/var/lib/mysql \-v /opt/docker-mariadb/conf.d:/etc/mysql/conf.d \-e MYSQL_ROOT_PASSWORD=123456 \mariadb:10.1.10</code></pre><p>查看docker容器运行状态</p><pre><code>docker ps -a</code></pre><h1 id="5-进入mariadb容器"><a href="#5-进入mariadb容器" class="headerlink" title="5.进入mariadb容器"></a>5.进入mariadb容器</h1><pre><code>docker exec -it mariadb-master bash</code></pre><h1 id="6-配置mysql-master用户授权"><a href="#6-配置mysql-master用户授权" class="headerlink" title="6.配置mysql master用户授权"></a>6.配置mysql master用户授权</h1><pre><code>mysql -uroot -pgrant replication slave,replication client on *.* to &#39;repluser&#39;@&#39;shangserver004&#39; identified by &#39;replpassword&#39;;flush privileges;show master status;</code></pre><h2 id="slave部署"><a href="#slave部署" class="headerlink" title="slave部署"></a>slave部署</h2><h1 id="1-创建mariadb数据配置文件-1"><a href="#1-创建mariadb数据配置文件-1" class="headerlink" title="1.创建mariadb数据配置文件"></a>1.创建mariadb数据配置文件</h1><pre><code>mkdir -p /opt/docker-mariadb/{data,conf.d,script}</code></pre><h1 id="2-拉取mairadb10-1-10镜像-1"><a href="#2-拉取mairadb10-1-10镜像-1" class="headerlink" title="2.拉取mairadb10.1.10镜像"></a>2.拉取mairadb10.1.10镜像</h1><pre><code>docker pull mariadb:10.1.10</code></pre><h1 id="3-创建mariadb配置文件-1"><a href="#3-创建mariadb配置文件-1" class="headerlink" title="3.创建mariadb配置文件"></a>3.创建mariadb配置文件</h1><pre><code>tee /opt/docker-mariadb/conf.d/my.cnf &lt;&lt;EOF[mysqld]datadir=/var/lib/mysqlsocket=/run/mysqld/mysqld.sockserver-id = 2#log_bin=slave-bin#binlog_format=rowrelay-log=relay-binexpire_logs_days = 30read-only = onsync_binlog = 1default-storage-engine=INNODB#sync_relay_log = 1#sync_relay_log_info = 1innodb_file_per_table = ONcharacter-set-server=utf8mb4slow_query_log = 1long_query_time = 2log_output = &#39;TABLE&#39;[mysql]default-character-set=utf8mb4auto-rehash[mysqld_safe]log-error=/var/log/mysql.logpid-file=/run/mysqld/mysqld.pidEOF</code></pre><h1 id="4-创建运行脚本-1"><a href="#4-创建运行脚本-1" class="headerlink" title="4.创建运行脚本"></a>4.创建运行脚本</h1><pre><code>tee /opt/docker-mariadb/script/mariadb.sh&lt;&lt;EOF#!/bin/bashdocker run -tid \--restart=always \--name mariadb-slave \-p 3307:3306 \-v /opt/docker-mariadb/data:/var/lib/mysql \-v /opt/docker-mariadb/conf.d:/etc/mysql/conf.d \-e MYSQL_ROOT_PASSWORD=123456 \mariadb:10.1.10EOF</code></pre><p>查看docker容器运行状态</p><pre><code>docker ps -a</code></pre><h1 id="5-进入mariadb容器-1"><a href="#5-进入mariadb容器-1" class="headerlink" title="5.进入mariadb容器"></a>5.进入mariadb容器</h1><pre><code>docker exec -it mariadb-slave bash</code></pre><h1 id="6-配置mysql-slave"><a href="#6-配置mysql-slave" class="headerlink" title="6.配置mysql slave"></a>6.配置mysql slave</h1><pre><code>mysql -uroot -p</code></pre><pre><code>change master tomaster_host=&#39;192.168.1.14&#39;,master_port=3307,master_user=&#39;repluser&#39;,master_password=&#39;replpassword&#39;,master_log_file=&#39;master-bin.000001&#39;,master_log_pos=674,master_connect_retry=5,master_heartbeat_period=2;</code></pre><pre><code>star slave;</code></pre><pre><code>show status slave;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前言&lt;br&gt;MariaDB数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可 MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。在存储引擎方面，使用XtraDB（英语：XtraDB）来代替MySQL的InnoDB。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Docker" scheme="http://ippai.top/categories/Docker/"/>
+    
+    
+      <category term="linux自动化运维" scheme="http://ippai.top/tags/linux%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/"/>
+    
+      <category term="docker" scheme="http://ippai.top/tags/docker/"/>
+    
+      <category term="mariadb" scheme="http://ippai.top/tags/mariadb/"/>
+    
+  </entry>
   
   <entry>
     <title>docker_swarm集群</title>
@@ -124,11 +168,11 @@
     </summary>
     
     
-      <category term="linux自动化运维" scheme="http://ippai.top/tags/linux%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/"/>
-    
       <category term="linux" scheme="http://ippai.top/tags/linux/"/>
     
       <category term="shell" scheme="http://ippai.top/tags/shell/"/>
+    
+      <category term="linux自动化运维" scheme="http://ippai.top/tags/linux%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
