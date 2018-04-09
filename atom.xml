@@ -177,7 +177,7 @@
     <link href="http://ippai.top/2018/04/04/Add-User-Script/"/>
     <id>http://ippai.top/2018/04/04/Add-User-Script/</id>
     <published>2018-04-04T10:39:32.000Z</published>
-    <updated>2018-04-09T07:55:46.274Z</updated>
+    <updated>2018-04-09T07:57:45.250Z</updated>
     
     <content type="html"><![CDATA[<p>前言<br>可用于服务器自动添加用户，并发送邮件<br>实现shell自动化建设<br><a id="more"></a></p><pre><code class="+shell">#!/bin/bashpassword=&quot;password&quot;ip=`ifconfig eth1 |grep inet |awk &#39;{printf &quot;IP:&quot;}&#39;&#39;{print $2}&#39;`echo &quot;请输入要创建的用户名：&quot;read usernameecho &quot;您输入的用户名为: $username&quot;egrep &quot;^servergroups&quot; /etc/group &gt;&amp; /dev/nullif [ $? -ne 0 ]then    groupadd servergroupselse    echo &quot;已存在servergroups组&quot;fiegrep &quot;^$username&quot; /etc/passwd &gt;&amp; /dev/nullif [ $? -ne 0 ]then    useradd $username &amp;&amp; \    usermod -aG servergroups $username &amp;&amp; \    echo $username | passwd --stdin $username    chage -d 0 $username    echo &quot;创建 $username 用户成功&quot;    #echo &quot;密码为:$password&quot;    id $username    text=&quot;用户名：$username\n密码为：$username\n$ip\n注意：第一次登陆必须要修改密码!!!!&quot;    echo -e &quot;$text&quot; | mail -s &quot;$username,服务器用户创建成功，请及时修改密码!!&quot; $username@qq.comelse    echo &quot;$username 已存在&quot;    id $usernamefi</code></pre>]]></content>
     
