@@ -967,7 +967,7 @@ fi
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
@@ -980,7 +980,7 @@ fi
         placeholder: '来呀，快活呀！',
         avatar:'mm',
         guest_info:guest,
-        pageSize:'10' || 10,
+        pageSize:'6' || 10,
     });
   </script>
 

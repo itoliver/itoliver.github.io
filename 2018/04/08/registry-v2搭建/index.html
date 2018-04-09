@@ -957,7 +957,7 @@ registry:2.4.1
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
@@ -970,7 +970,7 @@ registry:2.4.1
         placeholder: '来呀，快活呀！',
         avatar:'mm',
         guest_info:guest,
-        pageSize:'10' || 10,
+        pageSize:'6' || 10,
     });
   </script>
 
