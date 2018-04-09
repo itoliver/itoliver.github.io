@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="linux自动化运维,docker,docker-registry," />
+  <meta name="keywords" content="linux, NexT, Hexo, shell, docker, 博客, oliver, 自动化, 运维, nginx, php, mysql" />
 
 
 
@@ -85,18 +85,16 @@
 
 
 
-<meta name="description" content="前言新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由">
-<meta name="keywords" content="linux自动化运维,docker,docker-registry">
-<meta property="og:type" content="article">
-<meta property="og:title" content="registry v2搭建">
-<meta property="og:url" content="http://ippai.top/2018/04/08/registry-v2搭建/index.html">
+<meta name="description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Oliver Blog">
+<meta property="og:url" content="http://ippai.top/tags/docker/index.html">
 <meta property="og:site_name" content="Oliver Blog">
-<meta property="og:description" content="前言新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由">
+<meta property="og:description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-09T05:51:47.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="registry v2搭建">
-<meta name="twitter:description" content="前言新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。 之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由">
+<meta name="twitter:title" content="Oliver Blog">
+<meta name="twitter:description" content="IT界，改变以光速进行着。昨天，盖茨、乔布斯还是众多人的励志偶像，今天扎克伯格就成为更多年轻人追求美国梦的目标。但，他们只是IT男中的佼佼者，而在芸芸众生里还隐藏着各种各样的普通IT男，他们就在你触手可及的地方。">
 
 
 
@@ -126,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://ippai.top/2018/04/08/registry-v2搭建/"/>
+  <link rel="canonical" href="http://ippai.top/tags/docker/"/>
 
 
 
 
 
-  <title>registry v2搭建 | Oliver Blog</title>
+  <title>标签: docker | Oliver Blog</title>
   
 
 
@@ -151,7 +149,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
     <a href="https://github.com/itoliver/itoliver.github.io"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -289,253 +287,194 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>docker<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://ippai.top/2018/04/08/registry-v2搭建/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Oliver">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/blog-logo.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oliver Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2018/04/09/docker-nginx-php部署/" itemprop="url">
+              
+                <span itemprop="name">docker-nginx-php部署</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">registry v2搭建</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-            
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-08T11:16:20+08:00">
-                2018-04-08
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-09T12:38:29+08:00"
+              content="2018-04-09" >
+          04-09
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/04/08/registry-v2搭建/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/04/08/registry-v2搭建/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,022
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>前言<br>新版 registry v2对镜像存储格式进行了重新设计，并且和旧版还不兼容。registry v2是由go语言开发，docker从1.6版本开始支持registry v2，之前python开发的老版registry在网上已被标为废弃了（没有维护更新，但也可以用）。</p>
-<p>之前在测试环境搭建了一个老版的registry，用了也比较久了。为了跟上技术的脚步，也准备今后使用新版registry v2。由于对旧版是不兼容的，所以之前仓库的数据目录还不能直接拿来挂载，只好重新做个新的，镜像只好等以后慢慢再放上去了。下面对我这次配置的步骤简单的介绍一下。<br><a id="more"></a></p>
-<h1 id="服务器环境"><a href="#服务器环境" class="headerlink" title="服务器环境"></a>服务器环境</h1><p>本次使用centos7.3的操作系统，服务器IP假设为：192.168.0.100<br>预先装好docker服务，操作如下：</p>
-<h1 id="添加docker-repo安装源，写入文件"><a href="#添加docker-repo安装源，写入文件" class="headerlink" title="添加docker.repo安装源，写入文件"></a>添加docker.repo安装源，写入文件</h1><pre><code>tee /etc/yum.repos.d/docker.repo&lt;&lt;EOF
-[dockerrepo]
-name=Docker Repository
-baseurl=https://yum.dockerproject.org/repo/main/centos/7/
-enabled=1
-gpgcheck=1
-gpgkey=https://yum.dockerproject.org/gpg
-EOF
-</code></pre><h1 id="安装docker"><a href="#安装docker" class="headerlink" title="安装docker"></a>安装docker</h1><pre><code>yum install docker-engine -y
-systemctl enable docker
-systemctl start docker
-</code></pre><h1 id="1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可"><a href="#1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可" class="headerlink" title="1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可"></a>1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可</h1><pre><code>docker pull registry:2.4.1
-</code></pre><h1 id="2-运行registry-2-4-1容器"><a href="#2-运行registry-2-4-1容器" class="headerlink" title="2. 运行registry:2.4.1容器"></a>2. 运行registry:2.4.1容器</h1><p>这里需要注意的是新registry仓库数据目录的位置。之前老版的位置是/tmp/registry，hub.docker.com上的演示命令里写的是/tmp/registry-dev，其实这个不对。试验证明，新registry的仓库目录是在/var/lib/registry，所以运行时挂载目录需要注意。</p>
-<pre><code>docker run -d -p 5000:5000 --restart=always \
--v /opt/registry-var/:/var/lib/registry/ \
-registry:2.4.1
-</code></pre><p>-v选项指定将/opt/registry-var/目录挂载给/var/lib/registry/<br>当使用curl <a href="http://192.168.0.100:5000/v2/_catalog能看到json格式的返回值时，说明registry已经运行起来了。" target="_blank" rel="noopener">http://192.168.0.100:5000/v2/_catalog能看到json格式的返回值时，说明registry已经运行起来了。</a></p>
-<h1 id="3-修改配置文件以指定registry地址"><a href="#3-修改配置文件以指定registry地址" class="headerlink" title="3. 修改配置文件以指定registry地址"></a>3. 修改配置文件以指定registry地址</h1><p>上面registry虽然已经运行起来了，但是如果想用push命令上传镜像是会报错的，需要在配置文件中指定registry的地址。在/lib/systemd/system/docker.service文件中添加一下配置：<br>–insecure-registry 192.168.0.100:5000’</p>
-<p>为了配置简单，省去安全相关的配置，这里使用–insecure-registry选项修改配置文件后，一定要重启docker服务才能生效，</p>
-<pre><code>systemctl restart docker
-</code></pre><p>这时再push就可以上传镜像到所搭建的registry仓库了。需要注意的是，上传前要先给镜像tag一个192.168.0.100:5000/为前缀的名字，这样才能在push的时候存到私库。</p>
-<pre><code>docker tag docker.io/registry:2.4.1 192.168.0.100:5000/registry:2.4.1
-docker push 192.168.0.100:5000/registry:2.4.1
-</code></pre><h1 id="4-配置带用户权限的registry"><a href="#4-配置带用户权限的registry" class="headerlink" title="4. 配置带用户权限的registry"></a>4. 配置带用户权限的registry</h1><p>到上面为止，registry已经可以使用了。如果想要控制registry的使用权限，使其只有在登录用户名和密码之后才能使用的话，还需要做额外的设置。</p>
-<p>registry的用户名密码文件可以通过htpasswd来生成：</p>
-<pre><code>mkdir /opt/registry-var/auth/
-docker run --entrypoint htpasswd registry:2.4.1 -Bbn felix felix  &gt;&gt; /opt/registry-var/auth/htpasswd
-</code></pre><p>上面这条命令是为felix用户名生成密码为felix的一条用户信息，存在/opt/registry-var/auth/htpasswd文件里面，文件中存的密码是被加密过的。<br>使用带用户权限的registry时候，容器的启动命令就跟上面不一样了，将之前的容器停掉并删除，然后执行下面的命令：</p>
-<pre><code>docker run -d -p 5000:5000 --restart=always \
--v /opt/registry-var/auth/:/auth/ \
--e &quot;REGISTRY_AUTH=htpasswd&quot; \
--e &quot;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&quot; \
--e REGISTRY_AUTH_HTPASSWD_PATH=/auth/htpasswd \
--v /opt/registry-var/:/var/lib/registry/ \
-registry:2.4.1
-</code></pre><p>这时，如果直接想查看仓库信息、pull或push都会出现权限报错。必须先使用docker login 命令来登录私有仓库：</p>
-<pre><code>docker login 192.168.0.100:5000
-</code></pre><p>根据提示，输入用户名和密码即可。如果登录成功，会在/root/.docker/config.json文件中保存账户信息，这样就可以继续使用了。</p>
-
-      
-    </div>
-    
-    
-    
-
-    <div>
-      
-        
-      
-    </div>
-
-    
-
-    
-
-    
-
-<div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
-    
-</div
-  
-</div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/linux自动化运维/" rel="tag"># linux自动化运维</a>
-          
-            <a href="/tags/docker/" rel="tag"># docker</a>
-          
-            <a href="/tags/docker-registry/" rel="tag"># docker-registry</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/04/08/etcd集群/" rel="next" title="etcd集群">
-                <i class="fa fa-chevron-left"></i> etcd集群
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/08/docker-redis集群/" rel="prev" title="docker-redis集群">
-                docker-redis集群 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
+      
+        
 
-    <div class="post-spread">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/09/docker-mariadb集群-主从同步/" itemprop="url">
+              
+                <span itemprop="name">docker-mariadb集群-主从同步</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-09T12:27:34+08:00"
+              content="2018-04-09" >
+          04-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/08/docker-swarm集群/" itemprop="url">
+              
+                <span itemprop="name">docker_swarm集群</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-08T11:17:05+08:00"
+              content="2018-04-08" >
+          04-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/08/docker-redis集群/" itemprop="url">
+              
+                <span itemprop="name">docker-redis集群</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-08T11:16:46+08:00"
+              content="2018-04-08" >
+          04-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/08/registry-v2搭建/" itemprop="url">
+              
+                <span itemprop="name">registry v2搭建</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-08T11:16:20+08:00"
+              content="2018-04-08" >
+          04-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/04/08/etcd集群/" itemprop="url">
+              
+                <span itemprop="name">etcd集群</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-04-08T10:47:45+08:00"
+              content="2018-04-08" >
+          04-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -543,13 +482,6 @@ registry:2.4.1
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -570,17 +502,8 @@ registry:2.4.1
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -679,22 +602,6 @@ registry:2.4.1
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#服务器环境"><span class="nav-number">1.</span> <span class="nav-text">服务器环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#添加docker-repo安装源，写入文件"><span class="nav-number">2.</span> <span class="nav-text">添加docker.repo安装源，写入文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装docker"><span class="nav-number">3.</span> <span class="nav-text">安装docker</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-获取最新的registry的容器-了解到目前最新版为2-4-1，于是直接使用docker-pull命令从公用仓库去拉即可"><span class="nav-number">4.</span> <span class="nav-text">1. 获取最新的registry的容器,了解到目前最新版为2.4.1，于是直接使用docker pull命令从公用仓库去拉即可</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-运行registry-2-4-1容器"><span class="nav-number">5.</span> <span class="nav-text">2. 运行registry:2.4.1容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-修改配置文件以指定registry地址"><span class="nav-number">6.</span> <span class="nav-text">3. 修改配置文件以指定registry地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-配置带用户权限的registry"><span class="nav-number">7.</span> <span class="nav-text">4. 配置带用户权限的registry</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -847,10 +754,6 @@ registry:2.4.1
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
