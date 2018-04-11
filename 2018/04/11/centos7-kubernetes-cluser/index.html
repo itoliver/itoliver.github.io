@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="Oliver&#39;s Blog">
 <meta property="og:description" content="前言Kubernetes是Google开源的容器集群管理系统，其提供应用部署、维护、 扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，是Docker分布式系统的解决方案。k8s里所有的资源都可以用yaml或Json定义。K8s基本概念  MasterMaster节点负责整个集群的控制和管理，所有的控制命令都是发给它，上面运行着一组关键进程：  kube-apiserve">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T08:48:14.743Z">
+<meta property="og:updated_time" content="2018-04-11T08:54:17.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7部署kubernetes-cluser">
 <meta name="twitter:description" content="前言Kubernetes是Google开源的容器集群管理系统，其提供应用部署、维护、 扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，是Docker分布式系统的解决方案。k8s里所有的资源都可以用yaml或Json定义。K8s基本概念  MasterMaster节点负责整个集群的控制和管理，所有的控制命令都是发给它，上面运行着一组关键进程：  kube-apiserve">
@@ -639,7 +639,7 @@ ports:
 - containerPort: 80
 </code></pre><p>创建pod:</p>
 <pre><code>kubectl create -f nginx.yaml
-</code></pre><p>此时有如下报错：<br>Error from server: error when creating “nginx.yaml”: Pod “nginx” is forbidden: no API token found for service account default/default, retry after the token is automatically created and added to the service account<br>解决办法是编辑/etc/kubernetes/apiserver 去除 KUBE_ADMISSION_CONTROL中的SecurityContextDeny,ServiceAccount，并重启kube-apiserver.service服务：</p>
+</code></pre><p>此时有如下报错：<br><code>Error from server: error when creating &quot;nginx.yaml&quot;: Pod &quot;nginx&quot; is forbidden: no API token found for service account default/default, retry after the token is automatically created and added to the service account</code><br>解决办法是编辑/etc/kubernetes/apiserver 去除 KUBE_ADMISSION_CONTROL中的SecurityContextDeny,ServiceAccount，并重启kube-apiserver.service服务：</p>
 <pre><code>cat /etc/kubernetes/apiserver
 KUBE_ADMISSION_CONTROL=&quot;--admission_control=NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota&quot;
 </code></pre><pre><code>systemctl restart kube-apiserver.service
@@ -650,8 +650,14 @@ pods/nginx
 <pre><code>kubectl get pod nginx
 NAME READY STATUS RESTARTS AGE
 nginx 0/1 Image: nginx is not ready on the node 0 34s
-</code></pre><p>这里STATUS一直是这个，创建不成功，下面排错。通过查看pod的描述发现如下错误：<br>kubectl describe pod nginx<br>Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} implicitly required container POD pulled Successfully pulled Pod container image “gcr.io/google_containers/pause:0.8.0”<br>Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} implicitly required container POD failed Failed to create docker container with error: no such image<br>Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} failedSync Error syncing pod, skipping: no such image<br>Wed, 28 Oct 2015 10:27:30 +0800 Wed, 28 Oct 2015 10:29:30 +0800 2 {kubelet 192.168.1.16} implicitly required container POD failed Failed to pull image “gcr.io/google_containers/pause:0.8.0”: image pull failed for gcr.io/google_containers/pause:0.8.0, this may be because there are no credentials on this request. details: (API error (500): invalid registry endpoint “<a href="http://gcr.io/v0/&quot;" target="_blank" rel="noopener">http://gcr.io/v0/&quot;</a>. HTTPS attempt: unable to ping registry endpoint <a href="https://gcr.io/v0/" target="_blank" rel="noopener">https://gcr.io/v0/</a><br>v2 ping attempt failed with error: Get <a href="https://gcr.io/v2/" target="_blank" rel="noopener">https://gcr.io/v2/</a>: dial tcp 173.194.72.82:443: i/o timeout</p>
-<p>这里可能会遇到pod状态一直处于Penning的问题，此时可以通过kubectl describe pods/pod-name来查看pod信息，如果没有出错信息，那么Minion一直处于下载镜像中，下载好之后pod即会成功启动。</p>
+</code></pre><p>这里STATUS一直是这个，创建不成功，下面排错。通过查看pod的描述发现如下错误：</p>
+<pre><code>kubectl describe pod nginx 
+Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} implicitly required container POD pulled Successfully pulled Pod container image &quot;gcr.io/google_containers/pause:0.8.0&quot;
+Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} implicitly required container POD failed Failed to create docker container with error: no such image
+Wed, 28 Oct 2015 10:25:30 +0800 Wed, 28 Oct 2015 10:25:30 +0800 1 {kubelet 192.168.1.16} failedSync Error syncing pod, skipping: no such image
+Wed, 28 Oct 2015 10:27:30 +0800 Wed, 28 Oct 2015 10:29:30 +0800 2 {kubelet 192.168.1.16} implicitly required container POD failed Failed to pull image &quot;gcr.io/google_containers/pause:0.8.0&quot;: image pull failed for gcr.io/google_containers/pause:0.8.0, this may be because there are no credentials on this request. details: (API error (500): invalid registry endpoint &quot;http://gcr.io/v0/&quot;. HTTPS attempt: unable to ping registry endpoint https://gcr.io/v0/
+v2 ping attempt failed with error: Get https://gcr.io/v2/: dial tcp 173.194.72.82:443: i/o timeout
+</code></pre><p>这里可能会遇到pod状态一直处于Penning的问题，此时可以通过kubectl describe pods/pod-name来查看pod信息，如果没有出错信息，那么Minion一直处于下载镜像中，下载好之后pod即会成功启动。</p>
 <p>从网上找到 pause:0.8.0 的镜像，然后再每个node上导入镜像：</p>
 <p>请在境外docker服务器执行 docker pull 命令下载镜像</p>
 <pre><code>gcr.io/google_containers/pause:latest
