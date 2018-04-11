@@ -113,7 +113,7 @@
 <meta property="og:site_name" content="Oliver&#39;s Blog">
 <meta property="og:description" content="前言Kubernetes是Google开源的容器集群管理系统，其提供应用部署、维护、 扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，是Docker分布式系统的解决方案。k8s里所有的资源都可以用yaml或Json定义。K8s基本概念  MasterMaster节点负责整个集群的控制和管理，所有的控制命令都是发给它，上面运行着一组关键进程：  kube-apiserve">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-11T08:54:17.305Z">
+<meta property="og:updated_time" content="2018-04-11T08:56:46.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7部署kubernetes-cluser">
 <meta name="twitter:description" content="前言Kubernetes是Google开源的容器集群管理系统，其提供应用部署、维护、 扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，是Docker分布式系统的解决方案。k8s里所有的资源都可以用yaml或Json定义。K8s基本概念  MasterMaster节点负责整个集群的控制和管理，所有的控制命令都是发给它，上面运行着一组关键进程：  kube-apiserve">
@@ -449,7 +449,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,053
+                  2,050
                 </span>
               
 
@@ -495,7 +495,7 @@
 <li>Node<br>Node是工作负载节点，运行着Master分配的负载（Pod），但一个Node宕机时，其上的负载会被自动转移到其他Node上。其上运行的关键组件是：</li>
 </ol>
 <p>kubelet：负责Pod的生命周期管理，同时与Master密切协作，实现集群管理的基本功能。<br>kube-proxy：实现Service的通信与负载均衡机制的重要组件，老版本主要通过设置iptables规则实现，新版1.9基于kube-proxy-lvs 实现。<br>Docker Engine：Docker引擎，负责Docker的生命周期管理。<br><a id="more"></a></p>
-<h2 id="一、安装前准备"><a href="#一、安装前准备" class="headerlink" title="一、安装前准备"></a>一、安装前准备</h2><h1 id="1-操作系统详情"><a href="#1-操作系统详情" class="headerlink" title="1.操作系统详情"></a>1.操作系统详情</h1><p>需要三台主机，都最小化安装 centos7.3,并update到最新</p>
+<h2 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h2><h1 id="1-操作系统详情"><a href="#1-操作系统详情" class="headerlink" title="1.操作系统详情"></a>1.操作系统详情</h1><p>需要三台主机，都最小化安装 centos7.3,并update到最新</p>
 <pre><code>[root@master ~]# cat /etc/redhat-release 
 CentOS Linux release 7.3.1611 (Core)
 角色       主机名         IP
@@ -510,7 +510,7 @@ systemctl start iptables.service
 systemctl enable iptables.service
 </code></pre><h1 id="3-安装ntp服务"><a href="#3-安装ntp服务" class="headerlink" title="3.安装ntp服务"></a>3.安装ntp服务</h1><pre><code>yuminstall -y ntp wget net-tools 
 systemctl start ntpd systemctl enable ntpd
-</code></pre><h2 id="二、安装配置"><a href="#二、安装配置" class="headerlink" title="二、安装配置"></a>二、安装配置</h2><p>注：kubernetes，etcd等已经进去centos epel源，可以直接yum安装（需要安装epel-release）</p>
+</code></pre><h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><p>注：kubernetes，etcd等已经进去centos epel源，可以直接yum安装（需要安装epel-release）</p>
 <h1 id="1-安装Kubernetes-Master"><a href="#1-安装Kubernetes-Master" class="headerlink" title="1.安装Kubernetes Master"></a>1.安装Kubernetes Master</h1><p>使用以下命令安装kubernetes 和 etcd</p>
 <pre><code>yum install -y kubernetes etcd
 </code></pre><p>编辑/etc/etcd/etcd.conf 使etcd监听所有的ip地址，确保下列行没有注释，并修改为下面的值</p>
@@ -621,7 +621,7 @@ NAME           STATUS    AGE
 192.168.1.15   Ready     2h
 192.168.1.16   Ready     2h
 </code></pre><p>至此，kubernetes集群已经配置并运行了，我们可以继续下面的步骤。</p>
-<h2 id="三、创建-Pods-Containers"><a href="#三、创建-Pods-Containers" class="headerlink" title="三、创建 Pods (Containers)"></a>三、创建 Pods (Containers)</h2><p>为了创建一个pod，我们需要在kubernetes master上面定义一个yaml 或者 json配置文件。然后使用kubectl命令创建pod</p>
+<h2 id="创建-Pods-Containers"><a href="#创建-Pods-Containers" class="headerlink" title="创建 Pods (Containers)"></a>创建 Pods (Containers)</h2><p>为了创建一个pod，我们需要在kubernetes master上面定义一个yaml 或者 json配置文件。然后使用kubectl命令创建pod</p>
 <pre><code>mkdir -p /k8s/pods
 cd /k8s/pods/
 </code></pre><p>查看nginx.yaml内容如下：</p>
@@ -983,7 +983,7 @@ gcr.io/google_containers/pause                        0.8.0               bf5953
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装前准备"><span class="nav-number">1.</span> <span class="nav-text">一、安装前准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-操作系统详情"><span class="nav-number"></span> <span class="nav-text">1.操作系统详情</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-在每台主机上关闭firewalld改用iptables"><span class="nav-number"></span> <span class="nav-text">2.在每台主机上关闭firewalld改用iptables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-安装ntp服务"><span class="nav-number"></span> <span class="nav-text">3.安装ntp服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装配置"><span class="nav-number">1.</span> <span class="nav-text">二、安装配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-安装Kubernetes-Master"><span class="nav-number"></span> <span class="nav-text">1.安装Kubernetes Master</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装Kubernetes-Nodes"><span class="nav-number"></span> <span class="nav-text">2.安装Kubernetes Nodes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三、创建-Pods-Containers"><span class="nav-number">1.</span> <span class="nav-text">三、创建 Pods (Containers)</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装前准备"><span class="nav-number">1.</span> <span class="nav-text">安装前准备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-操作系统详情"><span class="nav-number"></span> <span class="nav-text">1.操作系统详情</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-在每台主机上关闭firewalld改用iptables"><span class="nav-number"></span> <span class="nav-text">2.在每台主机上关闭firewalld改用iptables</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-安装ntp服务"><span class="nav-number"></span> <span class="nav-text">3.安装ntp服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置"><span class="nav-number">1.</span> <span class="nav-text">安装配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-安装Kubernetes-Master"><span class="nav-number"></span> <span class="nav-text">1.安装Kubernetes Master</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-安装Kubernetes-Nodes"><span class="nav-number"></span> <span class="nav-text">2.安装Kubernetes Nodes</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建-Pods-Containers"><span class="nav-number">1.</span> <span class="nav-text">创建 Pods (Containers)</span></a></li></ol></div>
             
 
           </div>
